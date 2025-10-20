@@ -1,0 +1,16 @@
+[
+    {
+        "name": "CyVault",
+        "image": "https://raw.githubusercontent.com/Cydog-Browser/boosters/refs/heads/main/static/images/cyvault.png",
+        "link": "https://raw.githubusercontent.com/Cydog-Browser/boosters/refs/heads/main/static/apps/cyvault.html",
+        "url": "https://cydogbrowser.com/cyvault.php",
+        "settings": "",
+        "notes": "Managing this platform is under development.",
+        "cost": "Free",
+        "catalog": "https://raw.githubusercontent.com/Cydog-Browser/boosters/refs/heads/main/static/data/cyvault.json",
+        "brief": "Allows users to encrypt and decrypt files in their web browser.",
+        "abstract": "Users like simple file security that just works. The CyVault allows users to quickly deploy and manage file encryption and decryption.",
+        "explanation": "The CyVault is a deployable web application we call a booster. Boosters can be deployed quickly and do not need an application update to be deployed or updated. CyVault stores files in an IndexedDB on your web browser, allowing users to encrypt and decrypt files with a password. The booster works in a bridge mode to prevent data loss of your important files, storing a copy of any uploaded files to your Cydog Toolkit iCloud database.",
+        "license": "GPL-3.0 license"
+    }
+]

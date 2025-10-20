@@ -1,0 +1,748 @@
+<!DOCTYPE html>
+<html lang='en'>
+<head>
+    <meta charset='UTF-8'>
+    <meta name='viewport' content='width=device-width, initial-scale=1.0'>
+    <title>Cydog Browser - Vault</title>
+    <link rel='icon' type='image/x-icon' href='https://cydogbrowser.com/static/images/logot/favicon.ico'>
+    <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css'>
+    <style>
+        :root {
+            --primary: #0d6efd;
+            --dark-bg: #0a192f;
+            --dark-card: #1a2a4f;
+            --dark-text: #ffffff;
+            --light-bg: #f8f9fa;
+            --light-card: #ffffff;
+            --light-text: #000000;
+            --error: #dc3545;
+            --success: #198754;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            transition: background-color 0.3s, color 0.3s;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            min-height: 100vh;
+            background-color: var(--light-bg);
+            color: var(--light-text);
+        }
+
+        body.dark-mode {
+            background-color: var(--dark-bg);
+            color: var(--dark-text);
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 1rem;
+        }
+
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 0;
+            border-bottom: 1px solid rgba(0,0,0,0.1);
+        }
+
+        body.dark-mode header {
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 1.5rem;
+            font-weight: 700;
+        }
+
+        .logo img{
+            width: 42px;
+            height: 50px;
+        }
+
+        .theme-toggle {
+            background: none;
+            border: none;
+            cursor: pointer;
+            font-size: 1.2rem;
+            color: var(--light-text);
+        }
+
+        body.dark-mode .theme-toggle {
+            color: var(--dark-text);
+        }
+
+        .warning-modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.8);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+        }
+
+        .warning-content {
+            background-color: var(--light-card);
+            color: var(--light-text);
+            padding: 2rem;
+            border-radius: 8px;
+            max-width: 600px;
+            width: 90%;
+            text-align: center;
+        }
+
+        body.dark-mode .warning-content {
+            background-color: var(--dark-card);
+            color: var(--dark-text);
+        }
+
+        .warning-content h2 {
+            color: var(--error);
+            margin-bottom: 1rem;
+        }
+
+        .warning-content p {
+            margin-bottom: 1.5rem;
+            text-align: left;
+        }
+
+        .warning-content ul {
+            text-align: left;
+            margin-left: 1rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .warning-content li {
+            margin-bottom: 0.5rem;
+        }
+
+        .btn {
+            padding: 0.75rem 1.5rem;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: background-color 0.2s;
+        }
+
+        .btn-primary {
+            background-color: var(--primary);
+            color: white;
+        }
+
+        .btn-danger {
+            background-color: var(--error);
+            color: white;
+        }
+
+        .tabs {
+            display: flex;
+            gap: 0.5rem;
+            margin: 1rem 0;
+        }
+
+        .tab {
+            padding: 0.75rem 1rem;
+            cursor: pointer;
+            border-bottom: 2px solid transparent;
+        }
+
+        .tab.active {
+            border-bottom: 2px solid var(--primary);
+            font-weight: bold;
+        }
+
+        .tab-content {
+            display: none;
+            padding: 1.5rem 0;
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+
+        .card {
+            background-color: var(--light-card);
+            border-radius: 8px;
+            padding: 1.5rem;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            margin-bottom: 1.5rem;
+        }
+
+        body.dark-mode .card {
+            background-color: var(--dark-card);
+            box-shadow: 0 2px 10px rgba(0,0,0,0.3);
+        }
+
+        .card h3 {
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .form-group {
+            margin-bottom: 1rem;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 500;
+        }
+
+        input[type='text'],
+        input[type='password'],
+        input[type='file'] {
+            width: 100%;
+            padding: 0.75rem;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-size: 1rem;
+        }
+
+        body.dark-mode input[type='text'],
+        body.dark-mode input[type='password'],
+        body.dark-mode input[type='file'] {
+            background-color: #0a192f;
+            border-color: #2a3a5c;
+            color: var(--dark-text);
+        }
+
+        .file-list {
+            list-style: none;
+        }
+
+        .file-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0.75rem;
+            border-bottom: 1px solid #eee;
+        }
+
+        body.dark-mode .file-item {
+            border-bottom: 1px solid #333;
+        }
+
+        .file-name {
+            flex-grow: 1;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+        }
+
+        .file-actions {
+            display: flex;
+            gap: 0.5rem;
+        }
+
+        .btn-icon {
+            background: none;
+            border: none;
+            cursor: pointer;
+            font-size: 1rem;
+            color: var(--light-text);
+        }
+
+        body.dark-mode .btn-icon {
+            color: var(--dark-text);
+        }
+
+        .btn-icon:hover {
+            color: var(--primary);
+        }
+
+        .status-message {
+            padding: 0.75rem;
+            border-radius: 4px;
+            margin-bottom: 1rem;
+            display: none;
+        }
+
+        .status-error {
+            background-color: rgba(220, 53, 69, 0.1);
+            border: 1px solid var(--error);
+            color: var(--error);
+        }
+
+        .status-success {
+            background-color: rgba(25, 135, 84, 0.1);
+            border: 1px solid var(--success);
+            color: var(--success);
+        }
+
+        footer {
+            text-align: center;
+            padding: 2rem 0;
+            margin-top: 2rem;
+            border-top: 1px solid rgba(0,0,0,0.1);
+            font-size: 0.9rem;
+            color: #6c757d;
+        }
+
+        body.dark-mode footer {
+            border-top: 1px solid rgba(255,255,255,0.1);
+        }
+
+        @media (max-width: 768px) {
+            .tabs {
+                flex-direction: column;
+            }
+            
+            .tab {
+                text-align: center;
+                border-bottom: 1px solid #eee;
+                padding: 1rem;
+            }
+            
+            body.dark-mode .tab {
+                border-bottom: 1px solid #333;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class='warning-modal' id='warningModal'>
+        <div class='warning-content'>
+            <h2><i class='fas fa-exclamation-triangle'></i> IMPORTANT WARNING</h2>
+            <p>This secure vault operates entirely offline in your browser. Your files are encrypted and stored locally using Web Crypto API and IndexedDB.</p>
+            <p><strong>Critical information:</strong></p>
+            <ul>
+                <li>Files are <strong>NOT</strong> stored in the cloud or on any server</li>
+                <li>The vault is <strong>ONLY</strong> accessible in this browser on this device</li>
+                <li>If you clear browser data or change devices, your files will be permanently lost</li>
+                <li>Cydog Browser is not responsible for data loss or recovery</li>
+                <li>Remember your password - there is no password recovery option</li>
+            </ul>
+            <button id='acceptWarning' class='btn btn-primary'>I Understand & Accept</button>
+        </div>
+    </div>
+
+    <div class='container'>
+        <header>
+            <div class='logo'>
+                <img src='https://cydogbrowser.com/static/images/logot/favicon.ico'>
+                <span>Cydog Browser Vault</span>
+            </div>
+            <button class='theme-toggle' id='themeToggle'>
+                <i class='fas fa-moon'></i>
+            </button>
+        </header>
+
+        <div class='tabs'>
+            <div class='tab active' data-tab='upload'>Upload File</div>
+            <div class='tab' data-tab='files'>My Files</div>
+        </div>
+
+        <div class='tab-content active' id='uploadTab'>
+            <div class='card'>
+                <h3><i class='fas fa-upload'></i> Encrypt & Store File</h3>
+                <div class='status-message' id='uploadStatus'></div>
+                <div class='form-group'>
+                    <label for='fileInput'>Select File:</label>
+                    <input type='file' id='fileInput'>
+                </div>
+                <div class='form-group'>
+                    <label for='password'>Encryption Password:</label>
+                    <input type='password' id='password' placeholder='Enter strong password'>
+                </div>
+                <div class='form-group'>
+                    <label for='confirmPassword'>Confirm Password:</label>
+                    <input type='password' id='confirmPassword' placeholder='Re-enter password'>
+                </div>
+                <button class='btn' id='uploadBtn'>Encrypt & Store</button>
+            </div>
+        </div>
+
+        <div class='tab-content' id='filesTab'>
+            <div class='card'>
+                <h3><i class='fas fa-file'></i> Stored Files</h3>
+                <div class='status-message' id='filesStatus'></div>
+                <div class='form-group'>
+                    <label for='filePassword'>Enter Password:</label>
+                    <input type='password' id='filePassword' placeholder='Vault password'>
+                </div>
+                <ul class='file-list' id='fileList'>
+                    <!-- Files will be listed here -->
+                </ul>
+            </div>
+        </div>
+
+        <footer>
+            <p>Cydog Browser Vault &copy; 2023 | Offline Secure Storage | Files are encrypted and stored locally only</p>
+        </footer>
+    </div>
+
+    <script>
+        // DOM Elements
+        const warningModal = document.getElementById('warningModal');
+        const acceptWarning = document.getElementById('acceptWarning');
+        const themeToggle = document.getElementById('themeToggle');
+        const tabs = document.querySelectorAll('.tab');
+        const tabContents = document.querySelectorAll('.tab-content');
+        const uploadBtn = document.getElementById('uploadBtn');
+        const fileInput = document.getElementById('fileInput');
+        const passwordInput = document.getElementById('password');
+        const confirmPasswordInput = document.getElementById('confirmPassword');
+        const filePasswordInput = document.getElementById('filePassword');
+        const fileList = document.getElementById('fileList');
+        const uploadStatus = document.getElementById('uploadStatus');
+        const filesStatus = document.getElementById('filesStatus');
+
+        // State
+        let db_vault = null;
+        const VAULT_DB_NAME = 'CydogVault';
+        const VAULT_STORE_NAME = 'EncryptedFiles';
+
+        // Initialize
+        document.addEventListener('DOMContentLoaded', () => {
+            // Check if warning has been accepted
+            if (!localStorage.getItem('warningAccepted')) {
+                warningModal.style.display = 'flex';
+            } else {
+                initDB_vault();
+            }
+
+            // Set initial theme
+            if (localStorage.getItem('theme') === 'dark') {
+                document.body.classList.add('dark-mode');
+                themeToggle.innerHTML = `<i class='fas fa-sun'></i>`;
+            }
+        });
+
+        // Event Listeners
+        acceptWarning.addEventListener('click', () => {
+            localStorage.setItem('warningAccepted', 'true');
+            warningModal.style.display = 'none';
+            initDB_vault();
+        });
+
+        themeToggle.addEventListener('click', () => {
+            document.body.classList.toggle('dark-mode');
+            if (document.body.classList.contains('dark-mode')) {
+                localStorage.setItem('theme', 'dark');
+                themeToggle.innerHTML = `<i class='fas fa-sun'></i>`;
+            } else {
+                localStorage.setItem('theme', 'light');
+                themeToggle.innerHTML = `<i class='fas fa-moon'></i>`;
+            }
+        });
+
+        tabs.forEach(tab => {
+            tab.addEventListener('click', () => {
+                // Remove active class from all tabs
+                tabs.forEach(t => t.classList.remove('active'));
+                tabContents.forEach(tc => tc.classList.remove('active'));
+                
+                // Add active class to clicked tab
+                tab.classList.add('active');
+                document.getElementById(`${tab.dataset.tab}Tab`).classList.add('active');
+            });
+        });
+
+        uploadBtn.addEventListener('click', handleFileUpload);
+        filePasswordInput.addEventListener('input', loadFiles);
+
+        // Initialize IndexedDB
+        function initDB_vault() {
+            const request = indexedDB.open(VAULT_DB_NAME, 1);
+
+            request.onerror = (event) => {
+                console.error('Database error:', event.target.error);
+                showStatus(uploadStatus, 'Database initialization failed', 'error');
+            };
+
+            request.onupgradeneeded = (event) => {
+                db_vault = event.target.result;
+                if (!db_vault.objectStoreNames.contains(VAULT_STORE_NAME)) {
+                    const store = db_vault.createObjectStore(VAULT_STORE_NAME, { keyPath: 'id', autoIncrement: true });
+                    store.createIndex('name', 'name', { unique: false });
+                }
+            };
+
+            request.onsuccess = (event) => {
+                db_vault = event.target.result;
+                loadFiles();
+            };
+        }
+
+        // Handle file upload and encryption
+        async function handleFileUpload() {
+            const file = fileInput.files[0];
+            const password = passwordInput.value;
+            const confirmPassword = confirmPasswordInput.value;
+
+            // Validate inputs
+            if (!file) {
+                showStatus(uploadStatus, 'Please select a file', 'error');
+                return;
+            }
+
+            if (!password || password.length < 8) {
+                showStatus(uploadStatus, 'Password must be at least 8 characters', 'error');
+                return;
+            }
+
+            if (password !== confirmPassword) {
+                showStatus(uploadStatus, 'Passwords do not match', 'error');
+                return;
+            }
+
+            try {
+                // Generate encryption key from password
+                const key = await deriveKey(password);
+                
+                // Read file as ArrayBuffer
+                const fileBuffer = await readFileAsArrayBuffer(file);
+                
+                // Encrypt file data
+                const encryptedData = await encryptData(fileBuffer, key);
+                
+                // Prepare file metadata
+                const fileData = {
+                    name: file.name,
+                    type: file.type,
+                    size: file.size,
+                    encryptedData,
+                    createdAt: new Date().toISOString()
+                };
+
+                // Store in IndexedDB
+                const transaction = db_vault.transaction([VAULT_STORE_NAME], 'readwrite');
+                const store = transaction.objectStore(VAULT_STORE_NAME);
+                const request = store.add(fileData);
+
+                request.onsuccess = () => {
+                    showStatus(uploadStatus, `File '${file.name}' encrypted and stored successfully!`, 'success');
+                    // Clear form
+                    fileInput.value = '';
+                    passwordInput.value = '';
+                    confirmPasswordInput.value = '';
+                    // Reload files list
+                    loadFiles();
+                };
+
+                request.onerror = () => {
+                    showStatus(uploadStatus, 'Failed to store file', 'error');
+                };
+            } catch (error) {
+                console.error('Encryption error:', error);
+                showStatus(uploadStatus, 'File encryption failed: ' + error.message, 'error');
+            }
+        }
+
+        // Load files from IndexedDB
+        function loadFiles() {
+            if (!db_vault) return;
+
+            const password = filePasswordInput.value;
+            if (!password) {
+                fileList.innerHTML = `<li class='file-item'>Enter password to view files</li>`;
+                return;
+            }
+
+            const transaction = db_vault.transaction([VAULT_STORE_NAME], 'readonly');
+            const store = transaction.objectStore(VAULT_STORE_NAME);
+            const request = store.getAll();
+
+            request.onsuccess = async () => {
+                const files = request.result;
+                fileList.innerHTML = '';
+
+                if (files.length === 0) {
+                    fileList.innerHTML = `<li class='file-item'>No files stored</li>`;
+                    return;
+                }
+
+                for (const file of files) {
+                    const listItem = document.createElement('li');
+                    listItem.className = 'file-item';
+                    
+                    const fileName = document.createElement('span');
+                    fileName.className = 'file-name';
+                    fileName.textContent = file.name;
+                    
+                    const fileSize = document.createElement('span');
+                    fileSize.className = 'file-size';
+                    fileSize.textContent = formatFileSize(file.size);
+                    
+                    const fileActions = document.createElement('div');
+                    fileActions.className = 'file-actions';
+                    
+                    const downloadBtn = document.createElement('button');
+                    downloadBtn.className = 'btn-icon';
+                    downloadBtn.innerHTML = `<i class='fas fa-download'></i>`;
+                    downloadBtn.title = 'Download';
+                    downloadBtn.onclick = () => downloadFile(file, password);
+                    
+                    const deleteBtn = document.createElement('button');
+                    deleteBtn.className = 'btn-icon';
+                    deleteBtn.innerHTML = `<i class='fas fa-trash'></i>`;
+                    deleteBtn.title = 'Delete';
+                    deleteBtn.onclick = () => deleteFile(file.id);
+                    
+                    fileActions.appendChild(downloadBtn);
+                    fileActions.appendChild(deleteBtn);
+                    
+                    listItem.innerHTML = `
+                        <div class='file-name'>${file.name}</div>
+                        <div class='file-size'>${formatFileSize(file.size)}</div>
+                    `;
+                    listItem.appendChild(fileActions);
+                    fileList.appendChild(listItem);
+                }
+            };
+
+            request.onerror = () => {
+                showStatus(filesStatus, 'Failed to load files', 'error');
+            };
+        }
+
+        // Download file handler
+        async function downloadFile(file, password) {
+            try {
+                // Derive key from password
+                const key = await deriveKey(password);
+                
+                // Decrypt file data
+                const decryptedData = await decryptData(file.encryptedData, key);
+                
+                // Create Blob from decrypted data
+                const blob = new Blob([decryptedData], { type: file.type });
+                
+                // Create download link
+                const url = URL.createObjectURL(blob);
+                const a = document.createElement('a');
+                a.href = url;
+                a.download = file.name;
+                document.body.appendChild(a);
+                a.click();
+                
+                // Cleanup
+                setTimeout(() => {
+                    document.body.removeChild(a);
+                    URL.revokeObjectURL(url);
+                }, 100);
+                
+                showStatus(filesStatus, `'${file.name}' downloaded successfully!`, 'success');
+            } catch (error) {
+                console.error('Decryption error:', error);
+                showStatus(filesStatus, 'Failed to decrypt file: Incorrect password?', 'error');
+            }
+        }
+
+        // Delete file handler
+        function deleteFile(id) {
+            if (!confirm('Permanently delete this file? This action cannot be undone.')) return;
+
+            const transaction = db_vault.transaction([VAULT_STORE_NAME], 'readwrite');
+            const store = transaction.objectStore(VAULT_STORE_NAME);
+            const request = store.delete(id);
+
+            request.onsuccess = () => {
+                showStatus(filesStatus, 'File deleted successfully', 'success');
+                loadFiles();
+            };
+
+            request.onerror = () => {
+                showStatus(filesStatus, 'Failed to delete file', 'error');
+            };
+        }
+
+        // Crypto functions
+        async function deriveKey(password) {
+            const encoder = new TextEncoder();
+            const passwordBuffer = encoder.encode(password);
+            const importedKey = await window.crypto.subtle.importKey(
+                'raw',
+                passwordBuffer,
+                'PBKDF2',
+                false,
+                ['deriveKey']
+            );
+            
+            return window.crypto.subtle.deriveKey(
+                {
+                    name: 'PBKDF2',
+                    salt: encoder.encode('CydogVaultStaticSalt'),
+                    iterations: 100000,
+                    hash: 'SHA-256'
+                },
+                importedKey,
+                { name: 'AES-GCM', length: 256 },
+                false,
+                ['encrypt', 'decrypt']
+            );
+        }
+
+        async function encryptData(data, key) {
+            const iv = window.crypto.getRandomValues(new Uint8Array(12));
+            const encrypted = await window.crypto.subtle.encrypt(
+                { name: 'AES-GCM', iv },
+                key,
+                data
+            );
+            
+            // Combine IV and encrypted data
+            const combined = new Uint8Array(iv.length + encrypted.byteLength);
+            combined.set(iv);
+            combined.set(new Uint8Array(encrypted), iv.length);
+            
+            return combined;
+        }
+
+        async function decryptData(combined, key) {
+            const iv = combined.slice(0, 12);
+            const data = combined.slice(12);
+            
+            return window.crypto.subtle.decrypt(
+                { name: 'AES-GCM', iv },
+                key,
+                data
+            );
+        }
+
+        // Helper functions
+        function readFileAsArrayBuffer(file) {
+            return new Promise((resolve, reject) => {
+                const reader = new FileReader();
+                reader.onload = () => resolve(reader.result);
+                reader.onerror = reject;
+                reader.readAsArrayBuffer(file);
+            });
+        }
+
+        function formatFileSize(bytes) {
+            if (bytes < 1024) return bytes + ' B';
+            if (bytes < 1048576) return (bytes / 1024).toFixed(1) + ' KB';
+            return (bytes / 1048576).toFixed(1) + ' MB';
+        }
+
+        function showStatus(element, message, type) {
+            element.textContent = message;
+            element.className = 'status-message';
+            element.classList.add(`status-${type}`);
+            element.style.display = 'block';
+            
+            setTimeout(() => {
+                element.style.display = 'none';
+            }, 5000);
+        }
+    </script>
+</body>
+</html>
