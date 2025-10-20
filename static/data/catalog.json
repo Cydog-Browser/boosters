@@ -1,5 +1,6 @@
 [
     {
+        "id": "1",
         "name": "CyVault",
         "image": "https://raw.githubusercontent.com/Cydog-Browser/boosters/refs/heads/main/static/images/cyvault.png",
         "link": "https://raw.githubusercontent.com/Cydog-Browser/boosters/refs/heads/main/static/apps/cyvault.html",
