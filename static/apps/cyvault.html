@@ -9,6 +9,7 @@
     <style>
         :root {
             --primary: #0d6efd;
+            --primary-alt: #3682f4;
             --dark-bg: #0a192f;
             --dark-card: #1a2a4f;
             --dark-text: #ffffff;
@@ -233,6 +234,7 @@
             align-items: center;
             padding: 0.75rem;
             border-bottom: 1px solid #eee;
+            gap: 10px;
         }
 
         body.dark-mode .file-item {
@@ -256,15 +258,18 @@
             border: none;
             cursor: pointer;
             font-size: 1rem;
-            color: var(--light-text);
+            color: #fff;
+            background-color: var(--primary);
+            padding: 10px;
+            border-radius: 50%;
         }
 
         body.dark-mode .btn-icon {
-            color: var(--dark-text);
+            color: #fff;
         }
 
         .btn-icon:hover {
-            color: var(--primary);
+            background-color: var(--primary-alt);
         }
 
         .status-message {
@@ -293,15 +298,21 @@
             border-top: 1px solid rgba(0,0,0,0.1);
             font-size: 0.9rem;
             color: #6c757d;
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            background-color: var(--light-bg);
+            width: 100%;
         }
 
         body.dark-mode footer {
             border-top: 1px solid rgba(255,255,255,0.1);
+            background-color: var(--dark-bg);
         }
 
         @media (max-width: 768px) {
             .tabs {
-                flex-direction: column;
+                flex-direction: row;
             }
             
             .tab {
@@ -313,6 +324,20 @@
             body.dark-mode .tab {
                 border-bottom: 1px solid #333;
             }
+            
+            .warning-content {
+                width: 100%;
+                height: 100%;
+                border-radius: 0;
+                display: flex;
+                flex-flow: column;
+                justify-content: center;
+            }
+
+            .warning-content h2 {
+                font-size: 20px;
+            }
+
         }
     </style>
 </head>
@@ -337,7 +362,7 @@
         <header>
             <div class='logo'>
                 <img src='https://cydogbrowser.com/static/images/logot/favicon.ico'>
-                <span>Cydog Browser Vault</span>
+                <span>CyVault</span>
             </div>
             <button class='theme-toggle' id='themeToggle'>
                 <i class='fas fa-moon'></i>
