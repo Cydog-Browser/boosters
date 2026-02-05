@@ -13,5 +13,20 @@
         "abstract": "Users like simple file security that just works. The CyVault allows users to quickly deploy and manage file encryption and decryption.",
         "explanation": "The CyVault is a deployable web application we call a booster. Boosters can be deployed quickly and do not need an application update to be deployed or updated. CyVault stores files in an IndexedDB on your web browser, allowing users to encrypt and decrypt files with a password. The booster works in a bridge mode to prevent data loss of your important files, storing a copy of any uploaded files to your Cydog Toolkit iCloud database.",
         "license": "GPL-3.0 license"
+    },
+    {
+        "id": "2",
+        "name": "TasmaniaWeb",
+        "image": "https://raw.githubusercontent.com/Cydog-Browser/boosters/refs/heads/main/static/images/tasmaniaweb.png",
+        "link": "https://raw.githubusercontent.com/Cydog-Browser/boosters/refs/heads/main/static/apps/tasmaniaweb.html",
+        "url": "https://github.com/mdbench/TasmaniaWeb",
+        "settings": "",
+        "notes": "Managing this platform is under development.",
+        "cost": "Free",
+        "catalog": "https://raw.githubusercontent.com/Cydog-Browser/boosters/refs/heads/main/static/data/tasmaniaweb.json",
+        "brief": "Allows users to take notes in their web browser.",
+        "abstract": "Users like note-taking apps that work without harvesting their data. TasmaniaWeb allows users to create and manage their notes quickly and easily.",
+        "explanation": "TasmaniaWeb is a deployable web application we call a booster. Boosters can be deployed quickly and do not need an application update to be deployed or updated. TasmaniaWeb stores files in an IndexedDB on your web browser, allowing users to create and manage notes. The booster allows you to export your notes but does not allow bridge mode to CydogToolkit. A cloud export method is in the works.",
+        "license": "GPL-3.0 license"
     }
 ]
