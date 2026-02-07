@@ -43,5 +43,20 @@
         "abstract": "Users like calendars but calendars are bloated. Sometimes users just want a countdown to an event. If you ask NASA, they'll agree. FrauWeb allows users to create and track events from the current day to the day of the event.",
         "explanation": "FrauWeb is a deployable web application we call a booster. Boosters can be deployed quickly and do not need an application update to be deployed or updated. FrauWeb stores events in an IndexedDB on your web browser, allowing users to create and track countdowns. This booster does not allow bridge mode to Cydog Toolkit.",
         "license": "GPL-3.0 license"
+    },
+    {
+        "id": "4",
+        "name": "EnigmaWeb",
+        "image": "https://raw.githubusercontent.com/Cydog-Browser/boosters/refs/heads/main/static/images/enigmaweb.png",
+        "link": "https://raw.githubusercontent.com/Cydog-Browser/boosters/refs/heads/main/static/apps/enigmaweb.html",
+        "url": "https://github.com/mdbench/EnigmaWeb",
+        "settings": "",
+        "notes": "Managing this platform is under development.",
+        "cost": "Free",
+        "catalog": "https://raw.githubusercontent.com/Cydog-Browser/boosters/refs/heads/main/static/data/enigmaweb.json",
+        "brief": "Allows users to store files.",
+        "abstract": "Users like convenient file storage. EnigmaWeb allows users to store and manage files conveniently.",
+        "explanation": "EnigmaWeb is a deployable web application we call a booster. Boosters can be deployed quickly and do not need an application update to be deployed or updated. EnigmaWeb stores files in an IndexedDB on your web browser, allowing users to preview and manage them. This booster does not allow bridge mode to Cydog Toolkit.",
+        "license": "GPL-3.0 license"
     }
 ]
