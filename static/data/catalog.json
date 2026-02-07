@@ -26,7 +26,22 @@
         "catalog": "https://raw.githubusercontent.com/Cydog-Browser/boosters/refs/heads/main/static/data/tasmaniaweb.json",
         "brief": "Allows users to take notes in their web browser.",
         "abstract": "Users like note-taking apps that work without harvesting their data. TasmaniaWeb allows users to create and manage their notes quickly and easily.",
-        "explanation": "TasmaniaWeb is a deployable web application we call a booster. Boosters can be deployed quickly and do not need an application update to be deployed or updated. TasmaniaWeb stores files in an IndexedDB on your web browser, allowing users to create and manage notes. The booster allows you to export your notes but does not allow bridge mode to CydogToolkit. A cloud export method is in the works.",
+        "explanation": "TasmaniaWeb is a deployable web application we call a booster. Boosters can be deployed quickly and do not need an application update to be deployed or updated. TasmaniaWeb stores notes in an IndexedDB on your web browser, allowing users to create and manage notes. The booster allows you to export your notes but does not allow bridge mode to Cydog Toolkit. A cloud export method is in the works.",
+        "license": "GPL-3.0 license"
+    },
+    {
+        "id": "3",
+        "name": "FrauWeb",
+        "image": "https://raw.githubusercontent.com/Cydog-Browser/boosters/refs/heads/main/static/images/frauweb.png",
+        "link": "https://raw.githubusercontent.com/Cydog-Browser/boosters/refs/heads/main/static/apps/frauweb.html",
+        "url": "https://github.com/mdbench/FrauWeb",
+        "settings": "",
+        "notes": "Managing this platform is under development.",
+        "cost": "Free",
+        "catalog": "https://raw.githubusercontent.com/Cydog-Browser/boosters/refs/heads/main/static/data/frauweb.json",
+        "brief": "Allows users to track events and payments with a countdown.",
+        "abstract": "Users like calendars but calendars are bloated. Sometimes users just want a countdown to an event. If you ask NASA, they'll agree. FrauWeb allows users to create and track events from the current day to the day of the event.",
+        "explanation": "FrauWeb is a deployable web application we call a booster. Boosters can be deployed quickly and do not need an application update to be deployed or updated. FrauWeb stores events in an IndexedDB on your web browser, allowing users to create and track countdowns. This booster does not allow bridge mode to Cydog Toolkit.",
         "license": "GPL-3.0 license"
     }
 ]
