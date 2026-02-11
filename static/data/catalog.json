@@ -58,5 +58,50 @@
         "abstract": "Users like convenient file storage. EnigmaWeb allows users to store and manage files conveniently.",
         "explanation": "EnigmaWeb is a deployable web application we call a booster. Boosters can be deployed quickly and do not need an application update to be deployed or updated. EnigmaWeb stores files in an IndexedDB on your web browser, allowing users to preview and manage them. This booster does not allow bridge mode to Cydog Toolkit.",
         "license": "GPL-3.0 license"
+    },
+    {
+        "id": "5",
+        "name": "Notemod",
+        "image": "https://raw.githubusercontent.com/Cydog-Browser/boosters/refs/heads/main/static/images/notemod.png",
+        "link": "https://raw.githubusercontent.com/Cydog-Browser/boosters/refs/heads/main/static/apps/notemod.html",
+        "url": "https://github.com/mdbench/Notemod",
+        "settings": "",
+        "notes": "Managing this platform is under development.",
+        "cost": "Free",
+        "catalog": "https://raw.githubusercontent.com/Cydog-Browser/boosters/refs/heads/main/static/data/notemod.json",
+        "brief": "Allows users to create and manage advanced notes and task lists.",
+        "abstract": "Users want highly customized notes with embedded categories and to-do lists. Notemod allows users to create and manage notes quickly and easily.",
+        "explanation": "Notemod is a deployable web application we call a booster. Boosters can be deployed quickly and do not need an application update to be deployed or updated. Notemod stores notes in Local Storage on your web browser. This is not as secure as an IndexedDB and generally has a maximum capacity of 5MBs which is about 1 million words. Notemod has the ability to conduct Gist syncing to GitHub. This is not recommended as a cloud storage option. This booster does not allow bridge mode to Cydog Toolkit.",
+        "license": "MIT license"
+    },
+    {
+        "id": "6",
+        "name": "Drawit",
+        "image": "https://raw.githubusercontent.com/Cydog-Browser/boosters/refs/heads/main/static/images/drawit.png",
+        "link": "https://raw.githubusercontent.com/Cydog-Browser/boosters/refs/heads/main/static/apps/drawit.html",
+        "url": "https://github.com/mdbench/Drawit",
+        "settings": "",
+        "notes": "Managing this platform is under development.",
+        "cost": "Free",
+        "catalog": "https://raw.githubusercontent.com/Cydog-Browser/boosters/refs/heads/main/static/data/drawit.json",
+        "brief": "Allows users to make freeform images for note-taking or art.",
+        "abstract": "Sometimes users want to take notes by hand or draw custom images. Drawit allows users to create hand-written notes and drawings.",
+        "explanation": "Drawit is a deployable web application we call a booster. Boosters can be deployed quickly and do not need an application update to be deployed or updated. Drawit does not store anything on your web browser but users can save their hand-written notes or drawings with an export feature. This booster does not allow bridge mode to Cydog Toolkit.",
+        "license": "MIT license"
+    },
+    {
+        "id": "7",
+        "name": "AI Web Inferencer",
+        "image": "https://raw.githubusercontent.com/Cydog-Browser/boosters/refs/heads/main/static/images/aiwebinferencer.png",
+        "link": "https://raw.githubusercontent.com/Cydog-Browser/boosters/refs/heads/main/static/apps/aiwebinferencer.html",
+        "url": "https://github.com/mdbench/ai-web-inferencer",
+        "settings": "",
+        "notes": "Managing this platform is under development.",
+        "cost": "Free",
+        "catalog": "https://raw.githubusercontent.com/Cydog-Browser/boosters/refs/heads/main/static/data/aiwebinferencer.json",
+        "brief": "Allows users to leverage local AI models. Text generation will fail if you do not have enough memory.",
+        "abstract": "Sometimes users want to leverage free-to-use AI models or try ones available on Hugging Face. AI Web Inferencer allows users to use LLMs straight from their browser.",
+        "explanation": "AI Web Inferencer is a deployable web application we call a booster. Boosters can be deployed quickly and do not need an application update to be deployed or updated. AI Web Inferencer caches remote models in your browser with the option to use a local model. This booster does not allow bridge mode to Cydog Toolkit.",
+        "license": "MIT license"
     }
 ]
